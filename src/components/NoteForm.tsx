@@ -2,7 +2,7 @@ import { FormEvent, useRef, useState } from "react";
 import { Form, Row, Stack, Col, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable";
-import { Tag, NoteData } from "./App";
+import { Tag, NoteData } from "../App";
 import { v4 as uuidV4 } from "uuid";
 
 type NoteFormProps = {

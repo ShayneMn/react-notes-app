@@ -1,18 +1,10 @@
-import {
-  Badge,
-  Button,
-  Card,
-  Col,
-  Form,
-  Modal,
-  Row,
-  Stack,
-} from "react-bootstrap";
+import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
-import { Note, Tag } from "./App";
+import { Note, Tag } from "../App";
 import { useMemo, useState } from "react";
-import styles from "./NoteList.module.css";
+import { NoteCard } from "../components/NoteCard/NoteCard";
+import { EditTagsModal } from "../components/EditTagsModal";
 
 type NoteListProps = {
   availableTags: Tag[];
@@ -21,21 +13,7 @@ type NoteListProps = {
   onDeleteTag: (id: string) => void;
 };
 
-type SimplifiedNote = {
-  tags: Tag[];
-  title: string;
-  id: string;
-};
-
-type EditTagsModal = {
-  show: boolean;
-  handleClose: () => void;
-  availableTags: Tag[];
-  onUpdateTag: (id: string, label: string) => void;
-  onDeleteTag: (id: string) => void;
-};
-
-export function NoteList({
+export function NoteHome({
   availableTags,
   notes,
   onUpdateTag,
@@ -62,7 +40,7 @@ export function NoteList({
     <>
       <Row className="align-items-center mb-4">
         <Col>
-          <h1>Notes</h1>
+          <h1>My Notes</h1>
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
@@ -122,6 +100,7 @@ export function NoteList({
           );
         })}
       </Row>
+
       <EditTagsModal
         show={editTagsModalIsOpen}
         handleClose={() => setEditTagsModalIsOpen(false)}
@@ -130,82 +109,5 @@ export function NoteList({
         onDeleteTag={onDeleteTag}
       />
     </>
-  );
-}
-
-function NoteCard({ id, title, tags }: SimplifiedNote) {
-  return (
-    <>
-      <Card
-        as={Link}
-        to={`/${id}`}
-        className={`h-100 text-reset text-decoration-none ${styles.card}`}
-      >
-        <Card.Body>
-          <Stack
-            gap={2}
-            className="align-items-center justify-content-center h-100"
-          >
-            <span className="fs-5">{title}</span>
-            {tags.length > 0 && (
-              <Stack
-                gap={1}
-                direction="horizontal"
-                className="justify-content-center flex-wrap"
-              >
-                {tags.map((tag) => {
-                  return (
-                    <Badge className="text-truncate" key={tag.id}>
-                      {tag.label}
-                    </Badge>
-                  );
-                })}
-              </Stack>
-            )}
-          </Stack>
-        </Card.Body>
-      </Card>
-    </>
-  );
-}
-
-function EditTagsModal({
-  availableTags,
-  handleClose,
-  show,
-  onUpdateTag,
-  onDeleteTag,
-}: EditTagsModal) {
-  return (
-    <Modal show={show} onHide={handleClose}>
-      <Modal.Header>
-        <Modal.Title>Edit Tags</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Stack gap={2}>
-            {availableTags.map((tag) => (
-              <Row key={tag.id}>
-                <Col>
-                  <Form.Control
-                    type="text"
-                    value={tag.label}
-                    onChange={(e) => onUpdateTag(tag.id, e.target.value)}
-                  />
-                </Col>
-                <Col xs="auto">
-                  <Button
-                    onClick={() => onDeleteTag(tag.id)}
-                    variant="outline-danger"
-                  >
-                    &times;
-                  </Button>
-                </Col>
-              </Row>
-            ))}
-          </Stack>
-        </Form>
-      </Modal.Body>
-    </Modal>
   );
 }

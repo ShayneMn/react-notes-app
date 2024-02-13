@@ -1,14 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { NewNote } from "./NewNote";
-import { useLocalStorage } from "./useLocalStorage";
+import { NewNote } from "./pages/NewNote";
+import { useLocalStorage } from "./utils/useLocalStorage";
 import { useMemo } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { NoteList } from "./NoteList";
-import { NoteLayout } from "./NoteLayout";
-import { Note } from "./Note";
-import { EditNote } from "./EditNote";
+import { NoteHome } from "./pages/NoteHome";
+import { NoteLayout } from "./utils/NoteLayout";
+import { Note } from "./components/Note";
+import { EditNote } from "./pages/EditNote";
 
 export type RawNote = {
   id: string;
@@ -66,10 +66,6 @@ function App() {
           return note;
         }
       });
-      return [
-        ...prevNotes,
-        { ...data, id: uuidV4(), tagIds: tags.map((tag) => tag.id) },
-      ];
     });
   }
 
@@ -108,7 +104,7 @@ function App() {
           <Route
             path="/"
             element={
-              <NoteList
+              <NoteHome
                 availableTags={tags}
                 notes={notesWithTags}
                 onUpdateTag={updateTag}
