@@ -1,4 +1,12 @@
-import { Button, Col, Form, Modal, Row, Stack } from "react-bootstrap";
+import {
+  Button,
+  CloseButton,
+  Col,
+  Form,
+  Modal,
+  Row,
+  Stack,
+} from "react-bootstrap";
 import { Tag } from "../App";
 
 type EditTagsModal = {
@@ -19,7 +27,8 @@ export function EditTagsModal({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>Edit Tags</Modal.Title>
+        <Modal.Title>Edit Existing Tags</Modal.Title>
+        <CloseButton onClick={handleClose} />
       </Modal.Header>
       <Modal.Body>
         <Form>
