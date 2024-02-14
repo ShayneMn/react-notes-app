@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import styles from "./NoteCard.module.css";
 
 type SimplifiedNote = {
-  tags: Tag[];
-  title: string;
   id: string;
+  title: string;
+  markdown: string;
+  tags: Tag[];
 };
 
-export function NoteCard({ id, title, tags }: SimplifiedNote) {
+export function NoteCard({ id, title, markdown, tags }: SimplifiedNote) {
   return (
     <>
       <Card
@@ -22,22 +23,23 @@ export function NoteCard({ id, title, tags }: SimplifiedNote) {
             gap={2}
             className="align-items-center justify-content-center h-100"
           >
-            <span className="fs-5">{title}</span>
-            {tags.length > 0 && (
-              <Stack
-                gap={1}
-                direction="horizontal"
-                className="justify-content-center flex-wrap"
-              >
-                {tags.map((tag) => {
-                  return (
-                    <Badge className="text-truncate" key={tag.id}>
-                      {tag.label}
-                    </Badge>
-                  );
-                })}
-              </Stack>
-            )}
+            <span className="mt-2 fs-3">{title}</span>
+            <Stack
+              gap={1}
+              direction="horizontal"
+              className="justify-content-center flex-wrap"
+            >
+              {tags.map((tag) => {
+                return (
+                  <Badge className="text-truncate" key={tag.id}>
+                    {tag.label}
+                  </Badge>
+                );
+              })}
+            </Stack>
+            <span className="w-75 my-2 text-center text-truncate">
+              {markdown}
+            </span>
           </Stack>
         </Card.Body>
       </Card>

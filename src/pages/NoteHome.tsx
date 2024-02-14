@@ -91,11 +91,16 @@ export function NoteHome({
           </Col>
         </Row>
       </Form>
-      <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
+      <Row xs={1} sm={2} lg={3} xl={3} className="g-3">
         {filteredNotes.map((note) => {
           return (
             <Col key={note.id}>
-              <NoteCard id={note.id} title={note.title} tags={note.tags} />
+              <NoteCard
+                id={note.id}
+                title={note.title}
+                markdown={note.markdown}
+                tags={note.tags}
+              />
             </Col>
           );
         })}
