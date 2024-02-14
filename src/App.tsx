@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { NoteHome } from "./pages/NoteHome";
 import { NoteLayout } from "./utils/NoteLayout";
-import { Note } from "./components/Note";
+import { Note } from "./pages/Note";
 import { EditNote } from "./pages/EditNote";
 
 export type RawNote = {
