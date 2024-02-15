@@ -23,9 +23,11 @@ export function NoteCard({ id, title, markdown, tags }: SimplifiedNote) {
             gap={2}
             className="align-items-center justify-content-center h-100"
           >
-            <span className="mt-2 fs-3">{title}</span>
+            <span className="w-75 mt-2 fs-3 text-truncate text-center">
+              {title}
+            </span>
             <Stack
-              gap={1}
+              gap={2}
               direction="horizontal"
               className="justify-content-center flex-wrap"
             >
@@ -37,7 +39,7 @@ export function NoteCard({ id, title, markdown, tags }: SimplifiedNote) {
                 );
               })}
             </Stack>
-            <span className="w-75 my-2 text-center text-truncate">
+            <span className="w-75 my-3 text-center text-truncate">
               {markdown}
             </span>
           </Stack>
